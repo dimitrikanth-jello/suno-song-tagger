@@ -1,0 +1,541 @@
+________________
+
+
+name: "suno-song-tagger" description: "Mach ein fertiges Song-Ad-Script paste-ready für Suno in einem von drei Delivery-Modi (RAP / HYBRID / GESUNGEN): Header raus, minimale Struktur-Tags rein, Zeilen auf Modus-Dichte gebracht, Section-Länge gedeckelt, Länge geschätzt, Wortlaut bleibt exakt. Nutze diesen Skill IMMER bei: "sunoify", "suno-ready", "mach das für suno", "pack das in suno", "suno tags rein", "tags für suno", "suno version", "song tags", "suno format", "für den song umbauen", "als gesungenen song", "kein rap", "er rappt zu langsam", "suno spricht das falsch aus", oder wenn ein fertiges Song-Ad-Script gepostet wird, um es in Suno zu generieren. NICHT nutzen für: Style-Prompt/Exclude (suno-style-prompt), Voiceover/TTS-Prep (elevenlabs-vo), Scripts schreiben (jello-video-ad-creator), Referenz-Ads swipen (ad-swiper / ad-swipe-parts), Struktur-Check (song-ad-blueprint), Hooks (hook-architect). Ändert NIE Copy, formatiert nur."
+Suno Song Tagger
+What This Skill Does
+Nimmt ein fertiges Song-Ad-Script und liefert exakt den Text fürs Suno-Lyrics-Feld (Custom Mode): nur Lyrics + minimale Tags, Zeilen auf die Dichte des gewählten Delivery-Modus gebracht, Wortlaut unverändert. Der Modus (RAP / HYBRID / GESUNGEN) entscheidet Zeilenlänge, Satzzeichen-Logik und Längen-Deckel — nicht jede Song-Ad ist ein Rap.
+Intake — erst vollständig, dann arbeiten
+Pflicht:
+
+
+1. Das fertige Script. Komplett, Hook bis Close. Script-Änderungen sind nicht Job dieses Skills.
+2. Delivery-Modus: RAP, HYBRID oder GESUNGEN. Steht er im Style-Prompt aus suno-style-prompt → übernehmen. Sonst einmal fragen, mit Empfehlung aus der Längen-Schätzung (Phase 4). Nie still auf RAP defaulten.
+
+
+Optional (wenn vorhanden, 1:1 genutzt):
+
+
+3. Breakdown-Markierungen im Script (z. B. ⚠️ BREAKDOWN (ab "…", zurück ab "…")) → werden zu Breakdown-Tags.
+4. Chorus-Markierungen — vom Autor markierte Hook-/Refrain-Blöcke.
+
+
+Fehlen Breakdown-Marker: einmal fragen. Antwort "mach einfach" → Default-Regel aus Phase 3. Nie Copy nachfragen, nie Copy ergänzen.
+Die drei Delivery-Modi
+Modus
+	Wann
+	Zeilenlänge Verse
+	Hook-Satz
+	~Pace (Schätzung)
+	RAP
+	lange Story-Scripts (7.000+ Zeichen), Avatar trägt Rap
+	12–18 Wörter, max 25
+	ein Rutsch ohne Satzzeichen
+	≈ 6 Silben/Sek
+	HYBRID
+	lange Scripts, aber Avatar soll nicht „Rap" hören (melodischer Sing-Rap)
+	9–14 Wörter, max 18
+	ein Rutsch, max eine Atempause
+	≈ 4,5 Silben/Sek
+	GESUNGEN
+	kürzere Scripts oder bewusst gesungener Song
+	6–11 Wörter = eine gesungene Phrase
+	erste gesungene Phrase, kein Vorlauf
+	≈ 3 Silben/Sek
+	
+
+Die Pace-Werte sind eigene Schätzungen (keine Suno-Angabe) und werden über den Learnings-Rückfluss kalibriert. RAP-Herleitung: 140 BPM in 16teln = 140 × 4 ÷ 60 = 9,3 Silben/Sek physisches Maximum, real gerappt deutlich darunter.
+Kern-Prozess
+Phase 1 — Entrümpeln
+Alles raus, was kein gesprochenes/gesungenes Wort ist. Suno singt sonst die Überschriften.
+
+
+* Nummerierungen und Beat-Labels (① HOOK, ③ DER SPIEGEL – Versorger-Block, ⭐, (Main Pillar))
+* Produktions-Notizen (⚠️ BREAKDOWN (…)) — werden in Phase 3 zu Tags übersetzt
+* Interne Framework-Begriffe, Regieanweisungen, Kommentare
+
+
+Was bleibt: ausschließlich die Zeilen, die die Stimme sagt oder singt.
+Phase 2 — Zeilen auf Modus-Dichte bringen
+Suno liest jede Zeile als ungefähr eine Phrase/einen Takt. Wie lang eine Zeile sein muss, hängt am Modus:
+
+
+RAP — der eigentliche Hebel gegen schleppenden Rap:
+
+
+* Ziel 12–18 Wörter, harte Obergrenze 25. Zeilen unter ~8 Wörtern mit der Nachbarzeile zusammenziehen. Über 25 = Suno quetscht und verschluckt.
+* WEIL Kurzzeilen auf einen ganzen Takt gezogen werden → langsamer Rapper, egal was im Style steht.
+
+
+HYBRID:
+
+
+* Ziel 9–14 Wörter, Obergrenze 18. Kurzzeilen unter ~6 Wörtern zusammenziehen.
+* WEIL melodischer Sing-Rap Platz für Melodie braucht, aber trotzdem Dichte, damit lange Scripts durchgehen.
+
+
+GESUNGEN:
+
+
+* Eine Zeile = eine gesungene Phrase, 6–11 Wörter. NICHT zusammenziehen, sondern lange Sätze an der natürlichen Atemstelle umbrechen (vor Relativsatz, vor „und/aber/dass", nach Satzglied).
+* WEIL Suno gesungene Zeilen mit Atempause am Zeilenende phrasiert — kürzere Zeilen mit klaren Enden werden singbar, überlange werden gerusht.
+
+
+Für alle Modi:
+
+
+* Nur innerhalb eines Beats zusammenziehen/umbrechen, nie über einen Beat-Wechsel.
+* Zitate bleiben ganz — ein Dialog-Zitat wird nicht über zwei Zeilen gerissen (in GESUNGEN darf ein langes Zitat an seiner eigenen Atemstelle brechen, Anführungszeichen dann auf beiden Zeilen korrekt schließen/öffnen).
+* Listen-Beats (z. B. "Woche eins … Woche sechs") = ein Listenpunkt pro Zeile.
+* Chorus-Ausnahme (alle Modi): [Chorus]-Zeilen dürfen kürzer sein als die Verse-Untergrenze — an der Atemstelle umbrechen. WEIL kürzere Chorus-Zeilen klarere Phrasenenden und einen erkennbareren Hook bringen (usesuno 8er-Test, v5.5). Wortlaut bleibt — nur der Umbruch ändert sich.
+* Hook-Satz: RAP → die ersten ein bis drei Sätze als EINE Zeile ohne Kommas und Punkte. HYBRID → eine Zeile, höchstens ein Komma als Atempause. GESUNGEN → die erste gesungene Phrase, sofort, kein Vorlauf. Anführungszeichen, Doppelpunkt vor dem Zitat und Fragezeichen im Zitat bleiben in jedem Modus.
+Phase 2b — Satzzeichen = Pausen
+Suno interpretiert jedes Satzzeichen als Atempause.
+
+
+* Kommas innerhalb eines Gedankens raus (alle Modi): Relativsätze, Nebensätze, Einschübe. "ein Foto bekommen, auf dem meine Frau…" → "ein Foto bekommen auf dem meine Frau…".
+* Komma nur als bewusste Pause zwischen zwei Gedanken (RAP/HYBRID). In GESUNGEN übernimmt das Zeilenende diese Pause — Komma am Zeilenende weglassen.
+* Punkte komplett raus, außer bei bewusst allein stehender Zeile (Breakdown-Zeile, letzte CTA-Zeile).
+* Doppelpunkte, Gedankenstriche, Anführungszeichen, Fragezeichen bleiben — sie markieren Dialog und Betonung.
+* Zitate sind unantastbar — in jeder Zeile, auch im Hook. Vorgelesene Nachrichten („Ist das nicht deine?"), Aussagen anderer Figuren, Arzt-Sätze: Anführungszeichen, Fragezeichen, Doppelpunkt davor. WEIL Suno ein Zitat als andere Stimme/anderen Ton liefert — die Verletzung kommt aus dem Mund der anderen. Ohne Anführungszeichen wird der Stich zur Erzähler-Zeile.
+* Aufzählungs-Kommas bleiben ("jeder Bus, jede Kurve, jede Niederlage") — Stakkato gewollt.
+Phase 2c — Zahlen ausschreiben
+Suno spricht Ziffern falsch oder englisch aus. Jede Zahl wird zum Wort — ausnahmslos.
+
+
+* "47" → "siebenundvierzig", "70.000" → "siebzigtausend", "Block 12" → "Block zwölf"
+* Spielstände: "3:1" → "drei zu eins"
+* Uhrzeiten: "3 Uhr" → "drei Uhr"
+* Ordnungszahlen: "80. Minute" → "achtzigste Minute"
+* Produkt-Codes: "D3" → "D drei", "B12" → "B zwölf"
+* Bereits ausgeschriebene Zahlen bleiben so.
+Phase 2d — Homographen entschärfen
+Deutsche Wörter, die auch englische sind, liest Suno oft englisch — besonders allein ("Bad." wurde zu "bed"). Risikokandidaten: Also, Bad, Kind, Gift, Hut, Fast, Mist, Rat, Tag, Wand, Boot, Art, Brand, Hell, Stand, Bank, Last, Chef, Angel, Links, Rock, See, Tier, Gut, Wild, Mutter, Rind, Hose, Tot. „Also" ist der häufigste Fall („Also… das ist passiert") — nie mit Pünktchen oder Komma isolieren: „Also das ist passiert".
+
+
+* Nie als Ein-Wort-Fragment stehen lassen. Minimal einbetten: "Bad." → "stand im Bad".
+* Eingebettet im deutschen Satz meist okay — nur am Zeilenanfang oder nach Satzzeichen prüfen.
+* Der Kontext-Zusatz ist die einzige erlaubte Wort-Ergänzung im Skill: ein bis zwei Funktionswörter, Sinn unverändert.
+* Rutscht trotzdem ein Wort englisch durch: NICHT neu generieren, sondern per v6-Lyric-Edit nur dieses Wort fixen (Phase 6).
+Aussprache-Schreibweisen aus bestätigten Suno-Learnings (immer anwenden, sobald diese Begriffe im Script vorkommen):
+
+* "Stickstoffmonoxid" → "Schtickstoffmonoxid"
+* "Lieferessen" → "Liefa-Essen"
+* "S-Allyl-Cystein" → "S-Allyl-Cystee-ihn"
+* "Coenzym Q10" → "Co-Enzym Q zehn"
+
+Diese bestätigten Schreibweisen haben Vorrang vor der normalen Wortlaut-Regel und gelten für jede Wiederholung im Lyrics-Text. Neue vom Nutzer bestätigte Aussprache-Fixes hier ergänzen.
+Phase 2e — Flow-Modus (nur auf explizite Anfrage)
+Standard: Wortlaut bleibt exakt. Sagt der Nutzer ausdrücklich „mach's flüssiger", „Song-Version", „weniger sperrig", „darf angepasst werden" → Flow-Modus. Dann darf Sprache UND Inhalt umgebaut werden — nur innerhalb des Story-Skeletts. Flow-Modus ist auch der einzige Weg, ein zu langes Script für GESUNGEN passend zu machen (Kürzen ist Inhalt).
+
+
+Gelockt (bleibt 1:1):
+
+
+* Beat-Reihenfolge und Beat-Inhalt
+* Mechanismus-Logik (Cortisol → Alarmzustand → Körper hält fest → Alarm abschalten)
+* Wirkstoffe, Dosis, Wochen-Versprechen, Zahlen (Kilo, Alter, Wochen), Produkt, Offer, CTA
+* Breakdown- und Chorus-Stellen
+* Die Pain-Zitate aus dem Mund der anderen im Kern — der Stich muss derselbe bleiben
+
+
+Frei:
+
+
+* Formulierungen, Satzbau, Rhythmus, Reime
+* Hilfsverb-Ketten auflösen („hab ich im Bad gestanden" → „stand ich im Bad"), Dialog-Verben ins Präsens
+* Details und Bilder innerhalb eines Beats
+* Nebensätze und Füllinfos, die im Song bremsen → raus
+* Kleine Übergangszeilen → rein, solange kein neuer Claim
+* In GESUNGEN: eine kurze Refrain-Zeile wiederholen, damit der Chorus einen erkennbaren Anker bekommt
+
+
+Verboten:
+
+
+* Neue Wirkungsversprechen, neue Zahlen, neue Studien- oder Social-Proof-Claims
+* Beats streichen, zusammenlegen oder umsortieren
+* Mechanismus vereinfachen oder verändern
+
+
+QC: Beat-für-Beat-Check gegen das Original. Dann normale Tagger-Ausgabe plus Stichpunkte „was inhaltlich geändert". Hinweis an den Nutzer: Flow-Modus ändert Copy — vor Launch nochmal durch den CHECK-Modus von song-ad-blueprint.
+Phase 3 — Tags setzen (minimal)
+Erlaubte Tags — und nur diese, jeder auf eigener Zeile:
+
+
+Tag
+	Wo
+	[Verse]
+	Jeder Story-/Detail-Beat: Entdeckung, Spiegel-Inventar, Alles-probiert, Arzt, Mentor-Ankunft, Produkt, Mechanismus, Wirkstoffe, Dosis, Wochen, neue Partnerin, Vindication-Setup, Zeuge
+	[Chorus]
+	Die emotionalen Anker: Spiegel-Fazit, Kategorienfehler-Kern ("Das ist kein Fett…"), Vindication-Höhepunkt, Reframe-Kern
+	[Bridge]
+	Der Reframe-Einstieg ("Hier ist das Ding…") bis zum Chorus-Kern
+	[Outro]
+	Der komplette Close / CTA
+	[Beat drops out]
+	An jeder Breakdown-Markierung. Ohne Marker (Default): Frozen-Beat und Snub-Nachklapp. Plus immer vor der allerletzten CTA-Zeile.
+	[Beat drops in]
+	Direkt nach dem Breakdown-Block, an der "zurück ab"-Stelle
+	[Instrumental Break]
+	Nur zwischen Hook und erster Story-Section, wenn die Hook-Pause per Section-Wechsel nicht reicht
+	
+
+Breakdown-Tag — offener Test: [Beat drops out]/[Beat drops in] sind Custom-Labels, deren Wirkung Suno nicht dokumentiert. Der dokumentierte Standard ist [Breakdown]. Bis zum A/B bleibt unser Paar Standard; Testvariante: an derselben Stelle [Breakdown] statt [Beat drops out], und [Verse] statt [Beat drops in]. Ergebnis in die Learnings.
+
+
+Nicht erlaubt: [Spoken Word], [Whispered], [Belted], [Intimate], [Sparse], [Narrative Flow], [Melodic R&B Hook], [pads swell], [beat thins], [Intro] und ähnliche. WEIL Vocal-Tags den globalen Style nicht zuverlässig überschreiben (usesuno Tag-Referenz) und bei uns aktiv gebremst haben. Klang und Tempo gehören in den Style-Prompt.
+
+
+Hook-Pause: Der Hook endet als eigener Block. Nach der letzten Hook-Zeile Leerzeile + neuer [Verse]-Tag — der Section-Wechsel erzwingt ein Fill. Reicht das nicht: [Instrumental Break] dazwischen.
+Phase 3b — Section-Länge deckeln
+Sections über ~45 Sekunden rusht oder schneidet Suno eher ab (Warnschwelle des usesuno Duration Estimators). Deshalb pro Block eine Wort-Obergrenze:
+
+
+Modus
+	Max. Wörter pro Block
+	Herleitung
+	RAP
+	~160
+	45 Sek × 6 Silben/Sek ÷ 1,7 Silben/Wort
+	HYBRID
+	~120
+	45 × 4,5 ÷ 1,7
+	GESUNGEN
+	~80
+	45 × 3 ÷ 1,7
+	
+
+(1,7 Silben pro deutschem Wort = eigene Schätzung.)
+
+
+Block drüber → an einer Sub-Beat-Grenze (Orts-/Zeitsprung, neue Szene innerhalb des Beats) einen weiteren [Verse] setzen. Nie mitten in einem Gedanken teilen — jeder Section-Wechsel bringt ein kleines Fill.
+Phase 4 — Länge schätzen + Split
+Längen-Schätzung (immer): Song-Länge ≈ Wörter × 1,7 ÷ Pace (Sek). Beispiel 8.000-Zeichen-Script ≈ 1.330 Wörter (8.000 ÷ ~6 Zeichen pro Wort inkl. Leerzeichen) ≈ 2.260 Silben:
+
+
+* RAP: 2.260 ÷ 6 ≈ 377 Sek ≈ 6:17
+* HYBRID: 2.260 ÷ 4,5 ≈ 502 Sek ≈ 8:22
+* GESUNGEN: 2.260 ÷ 3 ≈ 753 Sek ≈ 12:33
+
+
+Plus Instrumental-Anteile. Liegt die Schätzung über 10 Minuten → Warnzeile unter dem Code-Block mit Rechnung. Kürzen ist Copy-Arbeit (Flow-Modus auf Anfrage oder song-ad-blueprint), nicht stillschweigend.
+
+
+Split (über dem Lyrics-Limit, Größenordnung ~5.000 Zeichen, in-app prüfen):
+
+
+* Schnittpunkt: natürlicher Beat-Break nach der Produkt-Übergabe ("Ich hab die Packung angeguckt, dann ihn"). Alternativ nach dem Arzt-Beat.
+* Teil 2 läuft als Extend, nicht als zweiter Neu-Run. Run 1 mit Teil 1 generieren → Extend ab dem Ende von Run 1 mit den Lyrics von Teil 2, gleicher Style + Exclude → Get Whole Song. WEIL zwei getrennte Runs Stimme und Beat zwischen den Hälften driften lassen; Extend erhält den ersten Teil und setzt ihn fort.
+* Fallback, wenn Extend driftet: Persona aus Run 1 erstellen und Teil 2 damit generieren.
+Phase 5 — Style-Prompt + Exclude
+Kommt aus suno-style-prompt — nicht hier bauen. Fragt jemand im Tagger-Kontext danach: auf suno-style-prompt verweisen bzw. diesen Skill anwerfen. WEIL zwei Prompt-Versionen in zwei Skills auseinanderlaufen.
+Phase 6 — Run-Workflow (für den Nutzer, nicht Teil des Outputs)
+1. Pre-Test auf v6-mini: Hook + erster Verse (~30 Sek) generieren. Tempo und Aussprache prüfen. Erst wenn das sitzt → Full Run.
+2. Full Run auf v6 (Precision-Modell). v6-wild nur zum Explorieren von Sound-Richtungen.
+3. Fixes, kleinster Eingriff zuerst:
+   * ein Wort falsch ausgesprochen → v6 Lyric-Edit (Einzelwort/Zeile ersetzen), kein Reroll
+   * eine Section schlecht → Section-Edit
+   * Genre/Stimme/Mix falsch → neuer Run mit geändertem Style (suno-style-prompt)
+   * Ende abgehackt → [Outro] prüfen oder Extend ab gutem Punkt
+4. Pro Rerun genau EINE Variable ändern (Lyrics-Format ODER Style ODER Exclude) und die Baseline aufheben. WEIL sonst nicht zuzuordnen ist, was gewirkt hat — einzelne Generationen streuen stark.
+5. Learning loggen — mit Modell (v6 / v6-mini / v6-wild), Modus und gemessener Länge (kalibriert die Pace-Werte).
+Non-Negotiables
+1. Inhalt unverändert. Erlaubt sind genau drei technische, sinnneutrale Eingriffe: Satzzeichen/Umbrüche (2, 2b), Zahlen ausschreiben (2c), Homographen mit ein bis zwei Funktionswörtern einbetten (2d). WEIL das Script fertig und reviewed ist.
+2. Modus zuerst, nie stillschweigend RAP. WEIL Zeilenlänge, Satzzeichen und Längen-Deckel komplett vom Modus abhängen — ein gesungener Song mit Rap-Formatierung wird gerusht.
+3. Zeilenlänge nach Modus-Tabelle (Chorus darf kürzer). WEIL Suno pro Zeile ≈ eine Phrase/einen Takt setzt — in RAP bremsen Kurzzeilen, in GESUNGEN rushen Langzeilen.
+4. Hook ohne Vorlauf, kein [Intro]. WEIL der erste Satz die Aufmerksamkeit holt und ein [Intro] Instrumental baut, bevor jemand redet.
+5. Alle Zahlen als Wörter, alle Homographen eingebettet. WEIL Suno Ziffern und alleinstehende Doppelwörter falsch rät.
+6. Nur die erlaubten Tags. WEIL Deskriptor-Tags nicht zuverlässig greifen und ein Tag-Wald die Struktur-Tags entwertet.
+7. Kein Block über dem Section-Deckel. WEIL Suno Sections über ~45 Sek rusht oder abschneidet.
+8. Chorus nur an emotionalen Ankern. WEIL Suno [Chorus] melodisch hebt — eine gesungene Wirkstoff-Liste killt die Glaubwürdigkeit.
+9. Breakdowns aus dem Script übernehmen, nie eigene erfinden (außer Default + vor der letzten CTA-Zeile).
+10. Split = Extend, nicht zweiter Neu-Run. WEIL getrennte Runs Stimme und Beat driften lassen.
+11. Kein Text außerhalb des Code-Blocks außer Split-Zeile und Längen-Warnzeile. WEIL das Deliverable copy-paste ist.
+Gold-Standard-Beispiel (RAP)
+Input (Entdeckungs-Beat):
+
+
+② DIE ENTDECKUNG
+
+
+Auf das Finale hab ich ein Jahr gespart. Markus und ich, seit 20 Jahren jedes Spiel. Jeder Bus, jede Kurve, jede Niederlage.
+
+
+Berlin. Achtzigste Minute. Zwei zu eins für uns.
+
+
+Das Handy vibriert. Unbekannte Nummer. Ein Foto.
+
+
+Ich hab reingezoomt.
+
+
+Unsere Kneipe. Der Tisch, an dem wir seit 20 Jahren sitzen.
+
+
+Meine Frau. Hinter ihr läuft das Finale im Fernseher.
+
+
+Vor ihr: Markus.
+
+
+Und in meinem Kopf war es still.
+
+
+Dann fällt das 3:1.
+
+
+70.000 springen. Der Typ neben mir hat mich umarmt und geschrien.
+
+
+Ich stand da. Handy in der Hand.
+
+
+Und der Moment, auf den ich ein Jahr gewartet hab, ist einfach an mir vorbeigelaufen.
+
+
+⚠️ BREAKDOWN (ab „Und in meinem Kopf war es still", zurück ab „Sechs Stunden Bus")
+
+
+Sechs Stunden Bus zurück. Die Jungs um mich rum.
+
+
+Ich hab gelächelt.
+
+
+Bei jedem Lied, bei jedem Bier, bei jedem Witz.
+
+
+Ich hab das Handy in der Jackentasche gelassen und das Lächeln draufgelassen.
+
+
+Sechs Stunden hat das gehalten.
+
+
+Output:
+
+
+[Verse]
+
+
+Auf das Finale hab ich ein Jahr gespart, Markus und ich seit zwanzig Jahren jedes Spiel, jeder Bus, jede Kurve, jede Niederlage
+
+
+Berlin, achtzigste Minute, zwei zu eins für uns, das Handy vibriert, unbekannte Nummer, ein Foto, ich hab reingezoomt
+
+
+Unsere Kneipe, der Tisch an dem wir seit zwanzig Jahren sitzen, meine Frau, hinter ihr läuft das Finale im Fernseher, vor ihr: Markus
+
+
+[Beat drops out]
+
+
+Und in meinem Kopf war es still, dann fällt das drei zu eins, siebzigtausend springen, der Typ neben mir hat mich umarmt und geschrien
+
+
+Ich stand da, Handy in der Hand, und der Moment auf den ich ein Jahr gewartet hab ist einfach an mir vorbeigelaufen
+
+
+[Beat drops in]
+
+
+Sechs Stunden Bus zurück, die Jungs um mich rum, ich hab gelächelt, bei jedem Lied, bei jedem Bier, bei jedem Witz
+
+
+Ich hab das Handy in der Jackentasche gelassen und das Lächeln draufgelassen, sechs Stunden hat das gehalten
+
+
+18 Zeilen → 7 Zeilen, kein Inhalt geändert. Punkte raus, Kommas nur zwischen Gedanken. "20" → "zwanzig", "3:1" → "drei zu eins", "70.000" → "siebzigtausend". Breakdown-Notiz zu zwei Tags. Header raus.
+
+
+Beispiel Hook RAP (erster Satz = ein Rutsch):
+
+
+Input:
+
+
+① HOOK
+
+
+Ich hab beim Pokalfinale ein Foto bekommen, auf dem meine Frau meinen besten Kumpel küsst.
+
+
+Von einer fremden Nummer. Drunter stand: „Ist das nicht deine?"
+
+
+Markus. 47 wie ich. Immer noch die Figur von damals.
+
+
+Er hatte morgens sein Ticket abgesagt. Grippe.
+
+
+Ich stand zwischen 70.000 Leuten und hab vom Spiel nichts mehr mitgekriegt.
+
+
+Neun Wochen später war das Foto das Beste, was mir je passiert ist.
+
+
+Wegen dem, was mein Bruder aus Zürich mitgebracht hat.
+
+
+Also… das ist passiert.
+
+
+Output:
+
+
+[Verse]
+
+
+Ich hab beim Pokalfinale ein Foto bekommen auf dem meine Frau meinen besten Kumpel küsst von einer fremden Nummer drunter stand: „Ist das nicht deine?"
+
+
+Markus, siebenundvierzig wie ich, immer noch die Figur von damals, er hatte morgens sein Ticket abgesagt, Grippe
+
+
+Ich stand zwischen siebzigtausend Leuten und hab vom Spiel nichts mehr mitgekriegt, neun Wochen später war das Foto das Beste was mir je passiert ist, wegen dem was mein Bruder aus Zürich mitgebracht hat
+
+
+Also das ist passiert
+
+
+Zeile 1 ist der Sprint. Das Zitat bleibt mit Doppelpunkt, Anführungszeichen, Fragezeichen. "Also das ist passiert" bleibt allein (ohne „…", weil „Also" ein Homograph ist).
+
+
+Beispiel Homograph:
+
+
+Input:  Drei Uhr nachts. Bad. Schal noch um den Hals.
+
+
+Output: Drei Uhr nachts, stand im Bad, Schal noch um den Hals, …
+
+
+Beispiel Chorus — RAP vs. GESUNGEN (gleicher Wortlaut, anderer Umbruch):
+
+
+RAP:
+
+
+[Verse]
+
+
+…
+
+
+Die Brust: weich, die Kieferlinie: weg, der Bart: grau, und ich hab nicht gedacht „die Schlampe", ich hab gedacht: Ja, ich würd mich auch nicht mehr wollen
+
+
+[Chorus]
+
+
+Ich war so lange damit beschäftigt alle über Wasser zu halten
+
+
+dass ich zum Mitbewohner geworden bin der die Rechnungen zahlt
+
+
+Ich hab alles gemacht was ein guter Mann machen soll
+
+
+und am Ende hat trotzdem keiner mehr hingeguckt
+
+
+GESUNGEN (Verse ebenfalls an Atemstellen gebrochen):
+
+
+[Verse]
+
+
+…
+
+
+Die Brust: weich, die Kieferlinie: weg, der Bart: grau
+
+
+und ich hab nicht gedacht „die Schlampe"
+
+
+ich hab gedacht: Ja, ich würd mich auch nicht mehr wollen
+
+
+[Chorus]
+
+
+Ich war so lange damit beschäftigt alle über Wasser zu halten
+
+
+dass ich zum Mitbewohner geworden bin der die Rechnungen zahlt
+
+
+Ich hab alles gemacht was ein guter Mann machen soll
+
+
+und am Ende hat trotzdem keiner mehr hingeguckt
+
+
+Das Inventar bleibt Verse, erst das emotionale Fazit wird Chorus. Der Chorus ist in beiden Modi an der Atemstelle gebrochen (Chorus-Ausnahme).
+Output-Format
+Genau so, nichts anderes:
+
+
+1. Ein Code-Block mit den kompletten Lyrics + Tags.
+2. Falls über dem Lyrics-Limit: Split: nach „…" schneiden, Teil 2 als Extend ab Ende Run 1, beginnt mit „[Verse] …".
+3. Falls Schätzung über 10 Min: Länge: ~X Wörter × 1,7 ÷ Y Silben/Sek ≈ Z Min — für [Modus] zu lang, Kürzen = Flow-Modus oder song-ad-blueprint.
+
+
+Kein Vorwort, keine Erklärung der Tag-Wahl. Nur auf Nachfrage: Begründung einzelner Entscheidungen oder Run-Workflow (Phase 6).
+WHAT NOT TO DO
+* Nie stillschweigend RAP annehmen — Modus fragen oder aus dem Style-Prompt übernehmen.
+* Nie Copy umschreiben, kürzen, "verbessern" oder Übergänge ergänzen (außer im Flow-Modus auf Anfrage).
+* Nie in RAP Kurzzeilen stehen lassen, weil sie "dramatisch" wirken — Dramatik kommt aus dem Breakdown-Tag.
+* Nie in GESUNGEN Zeilen auf Rap-Länge zusammenziehen — das rusht den Gesang.
+* Nie Deskriptor-Tags setzen ([Whispered], [Spoken Word], [Belted], [Intimate] …).
+* Nie pro Zeile einen eigenen Tag — Tags markieren Blöcke.
+* Nie Beat-Header oder Produktionsnotizen im Output lassen.
+* Nie über einen Beat-Wechsel hinweg zusammenziehen.
+* Nie [Chorus] auf Listen, Wirkstoffe, Dosierung oder Wochen-Progression.
+* Nie einen Block über den Section-Deckel laufen lassen.
+* Nie Teil 2 eines Splits als frischen Neu-Run planen — Extend.
+* Nie einen Style-Prompt in diesem Skill bauen — suno-style-prompt.
+* Nie eine Ziffer im Output lassen.
+* Nie Anführungszeichen entfernen.
+* Nie ein Doppelwort (Bad, Kind, Gift, Tag …) allein nach Satzzeichen stehen lassen.
+* Nie einen [Intro]-Tag setzen.
+* Nie Aufzählungs-Kommas entfernen.
+* Nie bei einem einzelnen Aussprachefehler einen kompletten Reroll empfehlen — Lyric-Edit.
+QC-Gate vor Abgabe
+1. Modus geklärt (aus Style-Prompt oder gefragt)?
+2. Diff gegen das Original: jedes Wort noch da, gleiche Reihenfolge? Einzige Abweichungen: Zahlen als Wörter, ein bis zwei Funktionswörter bei Homographen. (Stichprobe über mindestens drei Blöcke.)
+3. Zeilenlängen gegen Modus-Tabelle geprüft (Chorus darf kürzer)?
+4. Hook-Satz nach Modus-Regel, kein [Intro] davor?
+5. Jedes Zitat mit Anführungszeichen, Doppelpunkt, Fragezeichen — auch im Hook?
+6. Ziffern-Suche (0–9) im Output: Treffer = Fehler.
+7. Kommas in Relativ-/Nebensätzen raus? (GESUNGEN: Pausen über Zeilenende.)
+8. Homographen-Liste gegen den Output geprüft?
+9. Nur erlaubte Tags, jeder auf eigener Zeile?
+10. Jedes [Chorus] auf einem emotionalen Anker?
+11. Jeder Breakdown-Tag = Script-Markierung oder Default-Regel, mit Rückkehr-Tag danach (außer vor der letzten CTA-Zeile)?
+12. Kein Block über dem Section-Deckel des Modus?
+13. Header, Nummern, ⚠️-Notizen, Framework-Begriffe raus?
+14. Länge geschätzt — über 10 Min → Warnzeile mit Rechnung? Über Lyrics-Limit → Split-Zeile mit Extend-Anweisung?
+15. Außer Code-Block + ggf. Split-/Längen-Zeile nichts in der Antwort?
+Learnings-Rückfluss
+Wenn ein Suno-Output schleppt, rusht oder Tags anders reagieren als hier beschrieben: Zeile unter "Learnings" ergänzen — Datum · Modell (v6 / v6-mini / v6-wild) · Modus · Effekt · was geholfen hat · gemessene Song-Länge vs. Schätzung (kalibriert die Pace-Werte). Ohne Modell-Angabe ist ein Learning nach dem nächsten Suno-Update wertlos. Der Skill ist lokal — die Datei ist die einzige Wahrheit.
+Learnings
+* 2026-10-10 · Modell nicht protokolliert · RAP · Kurzzeilen (2–4 Wörter) sind der Hauptgrund für langsamen Rap; Tempo-Angaben im Style-Prompt allein ändern nichts. Zusammenziehen auf 12–18+ Wörter pro Zeile hat es gelöst.
+* 2026-10-10 · Modell nicht protokolliert · RAP · Deskriptor-Tags ([Spoken Word], [Whispered], [Minimal beat]) haben Suno aktiv gebremst; reduziert auf Struktur-Tags + Breakdown-Tags.
+* 2026-10-10 · Modell nicht protokolliert · RAP · Grammatik-Komma im Hook hat eine hörbare Pause erzeugt. Lösung: Hook-Satz ohne Satzzeichen, Relativsatz-Kommas generell raus.
+* 2026-10-10 · Modell nicht protokolliert · Ziffern falsch/englisch ausgesprochen ("3:1", "6 Stunden"). Lösung: alle Zahlen ausschreiben.
+* 2026-10-10 · Modell nicht protokolliert · "Bad." allein wurde "bed". Lösung: Homographen minimal einbetten.
+* 2026-10-10 · Modell nicht protokolliert · Anführungszeichen im Hook entfernt → Nachricht wurde Erzähler-Zeile. Zitate bleiben überall.
+* 2026-10-10 · Modell nicht protokolliert · RAP · Zeilen mit 30–35 Wörtern → zu schnell, Wörter verschluckt. Obergrenze 25.
+* 2026-10-10 · Modell nicht protokolliert · Hook und Entdeckung ohne Section-Wechsel ohne Pause durchgerappt. Lösung: Leerzeile + [Verse], Eskalation [Instrumental Break].
+* 2026-10-10 · Flow-Modus eingeführt (Phase 2e).
+* 2026-10-15 · Quelle usesuno.com (Tests auf v5.5) · Delivery-Modi RAP/HYBRID/GESUNGEN eingeführt — Skill war hart auf Rap verdrahtet.
+* 2026-10-15 · Quelle usesuno.com (v5.5, 8 Generationen) · Lange Zeilen → schnelles Word-Packing ohne verschluckte Wörter (bestätigt RAP-Regel); dichte Lyrics machten den Song teils LÄNGER (Ø 4:57 vs. 3:21) statt nur schneller → Zeilendichte ersetzt die Tempo-Lock im Style nicht.
+* 2026-10-15 · Quelle usesuno.com (v5.5) · Kürzere, wiederholte Chorus-Zeilen → klarere Phrasenenden und erkennbarerer Hook (4/4) → Chorus-Ausnahme eingeführt. Auf v6 noch unbestätigt.
+* 2026-10-15 · Quelle usesuno Duration Estimator · Sections über ~45 Sek werden gerusht/abgeschnitten → Section-Deckel (Phase 3b). Pace-Werte sind eigene Schätzungen, nach Runs kalibrieren.
+* 2026-10-15 · Suno v6 live seit 09.09.2026 (Section-Edit, Lyric-Edit, Extend) → Split als Extend, Einzelwort-Fixes statt Reroll, Pre-Test auf v6-mini.
+* 2026-10-15 · OFFENER TEST · [Breakdown] (dokumentiert) vs. [Beat drops out]/[Beat drops in] (custom) an derselben Stelle.
