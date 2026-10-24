@@ -1,0 +1,320 @@
+---
+name: suno-song-tagger
+description: 'Bereite fertige Song-Ad-Skripte für Jello als kopierfertige Suno-Lyrics in RAP, HYBRID oder GESUNGEN vor: musikalische Phrasierung, minimale Tags, Hook-Varianten mit gemeinsamem Body, Ausspracheaufbereitung und Generierungsblöcke bis 5.000 Zeichen. Nutze bei sunoify, suno-ready, mach das für Suno, Suno-Tags, Song-Tags, Suno-Format, als gesungenen Song, kein Rap, zu langsamem Rap oder Ausspracheproblemen in fertigen Skripten. Nicht zum Schreiben neuer Skripte, Erstellen von Style-Prompts/Exclude, Voiceover/TTS, Swipen, Blueprint-Prüfen oder Entwickeln neuer Hooks.'
+---
+
+# Suno Song Tagger
+
+## Zweck und Texttreue
+
+Bereite ein fertiges Werbesong-Skript für das Suno-Lyrics-Feld im Custom Mode vor. Erhalte alle drei Delivery-Modi RAP, HYBRID und GESUNGEN. Standardmäßig wird die Copy nicht umgeschrieben: keine Wörter ergänzen, streichen, ersetzen oder umstellen, auch nicht für Reime oder bessere Hook-Übergänge.
+
+Erlaubt bleiben die bisherigen technischen, sinnneutralen Eingriffe: Zeilenumbrüche und Absatzstruktur, die Satzzeichenregeln unten, Zahlen ausschreiben, Homographen minimal einbetten sowie bestätigte Aussprache-Schreibweisen. Diese ausdrücklich beibehaltenen Ausnahmen sind keine Erlaubnis für freie Textänderungen. Nur der ausdrücklich angeforderte Flow-Modus erlaubt weitergehende Änderungen.
+
+Entferne Produktionsheader und Notizen, übersetze relevante Markierungen in minimale Suno-Tags, phrasiere musikalisch und teile vollständige Sections auf kopierfertige Generierungsblöcke auf. Ein Generierungsblock enthält maximal **5.000 Zeichen einschließlich Tags, Leerzeichen, Satzzeichen und Zeilenumbrüchen**. Überschriften außerhalb des kopierten Textes und Code-Fences zählen nicht dazu. Ein niedrigeres tatsächlich verfügbares Feldlimit geht vor.
+
+## Intake — erst vollständig, dann arbeiten
+
+Pflicht:
+
+1. Fertiges Skript vollständig von Hook bis Close; bei Varianten alle Hooks und den gemeinsamen Body. Keine Copy ergänzen oder erneut anfordern, wenn sie bereits vorliegt.
+2. Delivery-Modus RAP, HYBRID oder GESUNGEN. Aus vorhandenem Style-Prompt übernehmen. Sonst einmal mit einer Empfehlung aus der Längenschätzung fragen; niemals stillschweigend RAP wählen.
+
+Optional: Breakdown-Markierungen einschließlich „ab … / zurück ab …“, vom Autor markierte Chorus-Blöcke und vorhandener Style-Prompt/Exclude.
+
+Fehlen Breakdown-Marker, einmal fragen. Bei „mach einfach“ gilt der Default aus Phase 3. Vorhandene Angaben nicht erneut abfragen.
+
+## Die drei Delivery-Modi
+
+| Modus | Einsatz | Verse-Phrasierung | Hook-Einstieg | Pace-Schätzung |
+| --- | --- | --- | --- | --- |
+| RAP | Lange Story-Skripte, oft 7.000+ Zeichen, Avatar trägt Rap | Gegenüber bisher etwa 20 % weniger rhythmische Belastung pro Rap-Zeile; grob 10–14 Wörter als Orientierung | Sofort zügig einsetzen, keine erzwungene überlange Sprint-Zeile | ≈ 6 Silben/Sek |
+| HYBRID | Melodischer Sing-Rap; lange Skripte mit Gesangsanteilen | Rap-Passagen etwa 20 % luftiger; grob 7–11 Wörter. Gesangsanteile nach Melodie und Atem | Sofort melodisch/rhythmisch einsetzen, natürliche Atemstellen | ≈ 4,5 Silben/Sek |
+| GESUNGEN | Kürzere Skripte oder bewusst gesungener Song | Etwa 6–11 Wörter pro gesungener Phrase, natürliche Atemstellen | Erste gesungene Phrase sofort, kein Vorlauf | ≈ 3 Silben/Sek |
+
+Die früheren Rap-Richtwerte waren RAP 12–18 Wörter, Obergrenze 25, und HYBRID 9–14 Wörter, Obergrenze 18. Neu sind die ungefähren 80 % dieser bisherigen Silbenmenge und rhythmischen Belastung maßgeblich. Etwa 20 Wörter in RAP beziehungsweise 14 in HYBRID sind Prüfmarken für besonders dichte Zeilen, keine mechanischen Grenzen. Wortlänge, Silben, Betonung, Reime und Performbarkeit entscheiden; keine Zeile auffüllen oder unnatürlich trennen, um eine Wortzahl zu erreichen.
+
+20 % weniger Dichte bedeutet weder exakt 20 % langsamer noch pauschal weniger BPM. RAP bleibt schnell, energiegeladen und rhythmisch dicht; HYBRID bleibt melodischer Sing-Rap. Vermeide unnötige Zwei- bis Vierwortzeilen. Eine kurze sinnvolle Phrase darf stehen bleiben, wenn das musikalisch passt.
+
+Pace-Werte sind eigene Schätzungen, keine Suno-Zusage. Nicht automatisch um 20 % senken; nach gemessenen Runs kalibrieren. Historische Herleitung für RAP: 140 BPM mit einer Silbe pro Sechzehntel ergeben rechnerisch 9,3 Silben/Sek, reale Performance liegt meist darunter. Der tatsächliche Flow hängt von Rhythmus und Artikulation ab.
+
+## Phase 1 — Entrümpeln und Hook-Enden prüfen
+
+Entferne alles, was nicht gesprochen oder gesungen werden soll: Nummerierungen, Beat-Labels wie „① HOOK“, interne Framework-Begriffe, Sterne, Kommentare und Regieanweisungen. Breakdown- und Chorus-Informationen zunächst für die Tag-Zuordnung aufbewahren. Entferne keine tatsächlich gesprochenen Wörter.
+
+Vergleiche **vor der Formatierung** die abschließenden Sätze beziehungsweise sinnvollen abschließenden Textpassagen aller Hooks im Originalskript. Ein identisches letztes Wort reicht nicht. Keine künstlich auf ein Einzelwort verkürzte Gemeinsamkeit konstruieren. Bei identischer abschließender Passage gilt Fall A, sonst Fall B. Unterschiedliche reine Produktionslabels zählen nicht als Textunterschied. Inhaltlich ähnliche, aber anders formulierte Enden gelten als unterschiedlich.
+
+Bei nur einer Hook entfällt der Variantenvergleich; Referenz plus gegebenenfalls Body-Fortsetzungen ausgeben, keine Varianten erfinden.
+
+## Phase 2 — Musikalisch phrasiert statt mechanisch umbrechen
+
+Arbeite wie ein Songwriter: Beurteile Bedeutung, Satzbau, natürliche Phrasen und Betonungen, Silbenmenge, Wortlängen, Rhythmus, Sprechfluss sowie vorhandene Reime und ähnliche Klangendungen gemeinsam.
+
+Formatiere zuerst den **gemeinsamen Body**, dann die Hook-Varianten. Im Fall B plane dabei seine ersten vier musikalischen Bars verbindlich. Eine optische Textzeile garantiert keinen Takt: Eine Phrase kann einen oder mehrere Takte tragen. Nutze den bekannten Groove beziehungsweise die BPM, soweit vorhanden, und eine plausible Betonungs- und Silbenverteilung für vier Takte. Fehlt ein festes Tempo, plane einen zum Modus passenden Taktfluss als musikalische Zielstruktur; behaupte keine garantierte Suno-Takttreue. Falls die Zuordnung nicht plausibel möglich ist, kläre nur die fehlende Takt-/Groove-Vorgabe, statt vier beliebige Zeilen als Bars auszugeben.
+
+### Rap-Passagen in RAP und HYBRID
+
+- Entlaste die bisherigen langen Zeilen um ungefähr 20 % ihrer Silbenmenge und rhythmischen Belastung. Verteile den unveränderten Text auf zusätzliche schlüssige Phrasen, ohne ihn zu kürzen.
+- Ein Satz darf über mehrere Bars laufen; nicht jede Zeile muss ein vollständiger Satz sein. Keine gleich langen Zeilen erzwingen.
+- Halte eng zusammengehörende Wortgruppen möglichst zusammen. Es gibt keine pauschal verbotenen Wörter am Zeilenende: „Ich nehme sie mit“ ist eine vollständige Phrase. „wie er mit / meiner besten Freundin …“ trennt dagegen eine enge Wortgruppe ungünstig.
+- Sprachlich sinnvoller ist beispielsweise „Ich hab meinen Mann erwischt, / wie er mit meiner besten Freundin im Bett gelandet ist.“ Prüfe zusätzlich die musikalische Belastung dieser zweiten Phrase; das Beispiel ist keine starre Vorlage.
+- Priorisiere vorhandene Reime, unreine Reime und ähnliche Klangendungen bei der Wahl der Zeilenenden. Mache sie ausschließlich durch passende Umbrüche hörbar. Keine Wörter oder Wortreihenfolgen für Reime ändern; keine überladenen Zeilen oder unnatürlichen Trennungen erzwingen.
+- Kein automatisches Zusammenziehen unter einer starren Mindestwortzahl. Verbinde kurze Fragmente nur, wenn Bedeutung, Flow und Atemführung davon profitieren.
+
+### GESUNGEN und gemeinsame Regeln
+
+- GESUNGEN bleibt bei natürlichen gesungenen Phrasen, ungefähr 6–11 Wörtern. Lange Sätze an Atemstellen brechen; nicht auf Rap-Dichte zusammenziehen. Gesungene Anteile in HYBRID entsprechend behandeln.
+- Nur innerhalb eines inhaltlichen Beats zusammenziehen oder umbrechen, nie über einen Beat-Wechsel hinweg.
+- Dialog-Zitate möglichst als Einheit erhalten. Ist ein langes Zitat musikalisch überladen, in allen Modi an seinen eigenen natürlichen Phrasengrenzen teilen; Inhalt, Sprecherzuordnung und korrekte Anführungszeichen erhalten. Keine überlange Rap-Zeile nur wegen der alten Zitat-Regel erzwingen.
+- Listen-Beats wie „Woche eins … Woche sechs“: ein Listenpunkt pro Zeile, lange Punkte bei Bedarf natürlich weiter phrasieren, keine Inhalte vermischen.
+- Chorus-Zeilen dürfen in allen Modi kürzer sein als Verse-Richtwerte. An Atemstellen umbrechen; Chorus nicht auf Verse-Dichte bringen. Wiederholungen nur, wenn im Original vorhanden oder im ausdrücklich aktivierten Flow-Modus erlaubt.
+- Hook ohne instrumentalen Vorlauf und ohne [Intro]. In RAP unnötige Pausen nach Phase 2b vermeiden; in HYBRID bewusste Atemstellen zulassen; in GESUNGEN sofort die erste gesungene Phrase. Die alte Forderung, ein bis drei Hook-Sätze zwingend in eine einzige Sprint-Zeile zu packen, entfällt zugunsten der neuen musikalischen Phrasierung.
+
+## Phase 2b — Satzzeichen und Pausen
+
+Die bisherige Satzzeichenaufbereitung bleibt als technische Ausnahme bestehen. Satzzeichen können Pausen beeinflussen; ihre Wirkung ist nicht für jede Generierung identisch.
+
+- Kommas innerhalb eines Gedankens entfernen: Relativsätze, Nebensätze, Einschübe. Beispiel: „ein Foto bekommen, auf dem meine Frau …“ → „ein Foto bekommen auf dem meine Frau …“.
+- Kommas in RAP/HYBRID nur als bewusste Pause zwischen Gedanken. In GESUNGEN kann das Zeilenende diese Pause übernehmen; Komma am Zeilenende weglassen.
+- Punkte entfernen, außer bei bewusst allein stehender Zeile, etwa Breakdown oder letzter CTA-Zeile.
+- Doppelpunkte, Gedankenstriche, Anführungszeichen und Fragezeichen zur Dialog- und Betonungsführung erhalten. Aufzählungs-Kommas für gewolltes Stakkato erhalten.
+- Zitate schützen: Anführungszeichen, zugehöriger Doppelpunkt und Fragezeichen bleiben auch im Hook. Eine vorgelesene Nachricht oder Aussage einer anderen Figur darf durch Formatierung nicht zur Erzähler-Aussage werden.
+
+## Phase 2c — Zahlen ausschreiben
+
+Zahlen im gesungenen oder gerappten Text ausnahmslos ausschreiben, bereits ausgeschriebene Zahlen unverändert lassen. Dies ist eine ausdrücklich erlaubte technische Ausnahme von der buchstäblichen Texttreue; Zahlenwert und Aussage bleiben identisch.
+
+- „47“ → „siebenundvierzig“, „70.000“ → „siebzigtausend“, „Block 12“ → „Block zwölf“.
+- Spielstand „3:1“ → „drei zu eins“; „3 Uhr“ → „drei Uhr“; „80. Minute“ → „achtzigste Minute“.
+- Produkt-Codes „D3“ → „D drei“, „B12“ → „B zwölf“.
+
+## Phase 2d — Homographen und bestätigte Aussprachevarianten
+
+Homographen können englisch ausgesprochen werden, besonders isoliert. Prüfkandidaten: Also, Bad, Kind, Gift, Hut, Fast, Mist, Rat, Tag, Wand, Boot, Art, Brand, Hell, Stand, Bank, Last, Chef, Angel, Links, Rock, See, Tier, Gut, Wild, Mutter, Rind, Hose, Tot.
+
+- Möglichst durch Umbruch und Satzzeichen in den bestehenden deutschen Kontext einbetten. „Also… das ist passiert“ → „Also das ist passiert“.
+- Falls das nicht genügt, bleibt die bisherige enge Ausnahme erhalten: ein bis zwei sinnneutrale Funktions-/Kontextwörter zur minimalen Einbettung, etwa „Bad.“ → „stand im Bad“. Keine neue Handlung oder neue Aussage erfinden. Kein allgemeiner Freibrief zum Ergänzen.
+- Eingebettete Homographen meist belassen; besonders am Zeilenanfang oder nach Satzzeichen prüfen.
+- Rutscht ein Wort trotzdem falsch durch, den kleinsten verfügbaren Lyric-Edit empfehlen statt eines kompletten Rerolls.
+
+Bestätigte Aussprache-Schreibweisen immer und bei jeder Wiederholung anwenden:
+
+| Original | Suno-Schreibweise |
+| --- | --- |
+| Stickstoffmonoxid | Schtickstoffmonoxid |
+| Lieferessen | Liefa-Essen |
+| S-Allyl-Cystein | S-Allyl-Cystee-ihn |
+| Coenzym Q10 | Co-Enzym Q zehn |
+
+Diese bestätigten Schreibweisen haben Vorrang vor der normalen Wortlautregel. Keine neuen phonetischen Varianten erfinden; neue vom Nutzer bestätigte Fixes können ergänzt werden. Begriffe aus dem Skript eindeutig zuordnen, keine inhaltliche Wirkstoffänderung vornehmen.
+
+## Phase 2e — Flow-Modus nur auf ausdrückliche Anfrage
+
+**Standardmäßig aus.** Ein Auftrag wie „für Suno formatieren“, „musikalischer umbrechen“, „20 % weniger dicht“ oder „Reime hervorheben“ aktiviert ihn nicht. Nur ausdrückliche Freigaben wie „Formulierungen dürfen angepasst werden“, „mach die Copy flüssiger“ oder eine klar angeforderte umgeschriebene Song-Version erlauben ihn. „Song-Version“ ohne klare Umschreibefreigabe nicht allein als Freigabe behandeln.
+
+Im Flow-Modus dürfen Sprache und Details innerhalb des Story-Skeletts angepasst werden:
+
+- Formulierungen, Satzbau, Rhythmus und Reime; Hilfsverb-Ketten auflösen, Dialog-Verben ins Präsens setzen.
+- Bremsende Nebensätze und Füllinfos kürzen, Details/Bilder innerhalb eines Beats ändern.
+- Kleine Übergangszeilen ergänzen, solange kein neuer Claim entsteht.
+- In GESUNGEN eine kurze Refrain-Zeile wiederholen, um einen musikalischen Anker zu bilden.
+
+Gelockt bleiben Beat-Reihenfolge und Beat-Inhalt, Mechanismus-Logik, Wirkstoffe, Dosis, Wochen-Versprechen, sämtliche relevanten Zahlen, Produkt, Offer, CTA, Breakdown- und Chorus-Stellen sowie der Kern der Pain-Zitate. Keine neuen Wirkungsversprechen, Zahlen, Studien- oder Social-Proof-Claims; keine Beats streichen, zusammenlegen oder umsortieren; Mechanismus nicht vereinfachen oder verändern.
+
+Kürzen für GESUNGEN ist Copy-Arbeit und erfordert diese ausdrückliche Freigabe oder einen separaten Copy-Auftrag. Anschließend Beat für Beat gegen das Original prüfen, Änderungen knapp außerhalb der Lyrics nennen und vor Launch einen Check durch song-ad-blueprint empfehlen. Den gemeinsamen Body zuerst finalisieren und die vier Übergangs-Bars danach unverändert in die Varianten kopieren; keine Variante individuell umschreiben.
+
+## Phase 3 — Minimale Tags setzen
+
+Nur folgende Tags verwenden, jeder auf eigener Zeile:
+
+| Tag | Verwendung |
+| --- | --- |
+| [Verse] | Story-/Detail-Beats: Entdeckung, Spiegel-Inventar, Alles-probiert, Arzt, Mentor, Produkt, Mechanismus, Wirkstoffe, Dosis, Wochen, neue Partnerin, Vindication-Setup, Zeuge |
+| [Chorus] | Emotionale Anker: Spiegel-Fazit, Kategorienfehler-Kern wie „Das ist kein Fett …“, Vindication-Höhepunkt, Reframe-Kern |
+| [Bridge] | Reframe-Einstieg wie „Hier ist das Ding …“ bis zum Chorus-Kern |
+| [Outro] | Gesamter Close/CTA |
+| [Beat drops out] | An Breakdown-Markierungen; bei freigegebenem Default Frozen-Beat und Snub-Nachklapp; außerdem immer vor der allerletzten CTA-Zeile |
+| [Beat drops in] | Direkt nach dem Breakdown, an der „zurück ab“-Stelle; nicht nach der letzten CTA-Zeile nötig |
+| [Instrumental Break] | Nur zwischen Hook und erster Story-Section, wenn der normale Section-Wechsel als Hook-Pause nicht reicht |
+
+Hook als eigenen Block schließen, danach Leerzeile und neuer [Verse]-Tag beziehungsweise der passende Body-Struktur-Tag. Dieser Section-Wechsel soll die Hook absetzen; er garantiert keinen bestimmten Fill. Erst bei Bedarf [Instrumental Break].
+
+Keine zusätzlichen Deskriptor-/Performance-Tags wie [Spoken Word], [Whispered], [Belted], [Intimate], [Sparse], [Narrative Flow], [Melodic R&B Hook], [pads swell], [beat thins] oder [Intro]. Tags markieren Sections, nicht jede einzelne Zeile. [Chorus] nicht auf Wirkstoff-, Dosis- oder Wochenlisten setzen.
+
+Offener Breakdown-Test bleibt erhalten: Das bisherige Paar [Beat drops out]/[Beat drops in] sind Custom-Labels mit ungesicherter Wirkung. [Breakdown] ist die bisher notierte Standard-Testalternative; nur bei einem gezielten A/B-Test an derselben Stelle statt [Beat drops out] verwenden und mit [Verse] zurückkehren. Ergebnis als Learning festhalten.
+
+Bestehende Anweisungen auf zügige, klare, rhythmische und verständliche Performance ausrichten. Keine Forderung nach maximaler Geschwindigkeit, atemloser Dauerverdichtung oder erzwungenem Word-Packing stehen lassen, die der Entlastung widerspricht. Klang/Tempo bleiben Aufgabe des vorhandenen Style-Prompts beziehungsweise von suno-style-prompt; hier keinen konkurrierenden Style-Prompt erfinden. Innerhalb einer Cover-Serie exakt denselben finalen Style-Prompt verwenden.
+
+## Phase 3b — Section-Länge deckeln
+
+Section und Generierungsblock unterscheiden: Ein Generierungsblock kann mehrere vollständige Sections enthalten. Die bisherigen ungefähren Section-Deckel bleiben als konservative Planung erhalten:
+
+| Modus | Ungefähre Wörter pro Section | Herleitung |
+| --- | --- | --- |
+| RAP | 160 | 45 Sek × 6 Silben/Sek ÷ 1,7 Silben/Wort |
+| HYBRID | 120 | 45 × 4,5 ÷ 1,7 |
+| GESUNGEN | 80 | 45 × 3 ÷ 1,7 |
+
+1,7 Silben pro deutschem Wort ist eine Schätzung. Sehr lange Sections können gehetzt oder abgeschnitten werden; bei silbenreichen Wörtern früher teilen. Über dem Deckel an einer Sub-Beat-Grenze wie Orts-/Zeitsprung oder neuer Szene einen weiteren [Verse] setzen, nicht mitten in einem Gedanken. Chorus vollständig und innerhalb des Deckels planen. Section-Wechsel können musikalische Übergänge auslösen.
+
+## Phase 4 — Hook-Varianten, Länge und Generierungsblöcke
+
+### Fall A — identische abschließende Hook-Passage
+
+- Referenz: **Hook 1 plus erster Body-Abschnitt**, nach den bestehenden musikalischen Section- und Split-Regeln, maximal 5.000 Zeichen.
+- Weitere Varianten: jeweils **nur Hook 2, Hook 3 usw.**, einschließlich ihrer gemeinsamen abschließenden Textpassage.
+- Kein zusätzlicher Name und keine besondere Schnittstellenmarkierung für das gemeinsame Hook-Ende.
+
+### Fall B — unterschiedliche Hook-Enden
+
+- Plane die ersten **vier musikalischen Takte des Bodies**, nicht vier beliebige optische Zeilen. Halte die Taktzuordnung bei Bedarf in einer kurzen Produktionsnotiz außerhalb des kopierten Textes fest; keine Bar-Nummern, Schnittmarkierungen oder neuen Tags in die Lyrics einfügen.
+- Referenz: **Hook 1 plus erster Body-Abschnitt** ganz normal nach den bisherigen Aufteilungsregeln und maximal 5.000 Zeichen. Die ersten vier Bars bleiben enthalten. Die Referenz nicht auf diese vier Bars verkürzen; verfügbaren Platz bis zu einer passenden vollständigen Section-Grenze nutzen.
+- Weitere Varianten: jeweils **Hook 2, Hook 3 usw. plus exakt dieselben ersten vier Body-Bars**. Die Passage einmal final formatieren und dann kopieren: identischer Wortlaut, identische Ausspracheaufbereitung, identische Satzzeichen, identische Zeilen-/Absatzaufteilung und identische zugehörige Suno-Tags. Nicht pro Hook neu phrasieren.
+- Der Body-Anfang bis zum Ende von Bar 4 bleibt zusammen. Innerhalb dieser Passage keine neue Schnittalternative planen. Folge-Sections bereits vor dem Kopieren passend an Bar 5 anschließen.
+- Beim Schnitt gehören diese vier Body-Bars zur jeweiligen Hook-Variante. Danach den gemeinsamen Body aus der Referenz **ab Bar 5** anschließen. Die ersten vier Bars nicht nochmals abspielen und nicht aus der Referenz entfernen.
+
+Für beide Fälle: Die erste Version als Cover-Referenz für weitere Hooks nutzen, **Audio Influence 85 % und derselbe Style-Prompt**; jeweils den vorgesehenen Lyrics-Text austauschen. Identischer Text und Cover-Einstellungen unterstützen ähnliche Übergänge, garantieren aber keine exakt identische musikalische Umsetzung. Die vier Bars sind eine musikalische Planung; beim Schnitt das tatsächliche Audio auf Taktgrenzen prüfen, ohne eine andere Übergangspassage zu erfinden.
+
+### Länge schätzen
+
+Geschätzte Dauer ≈ Wörter × 1,7 ÷ Modus-Pace in Sekunden, zuzüglich Instrumentalanteilen. Tatsächliche Wörter nach technischer Aufbereitung zählen. Bei Varianten jede komplette Schnittfassung als jeweilige Hook plus einmaliger Body betrachten; die vier kopierten Bars nicht doppelt als Songinhalt zählen. Alle alternativ generierten Hooks sind nicht ein einzelner langer Song.
+
+Historisches Rechenbeispiel: ca. 8.000 Zeichen ≈ 1.330 Wörter ≈ 2.260 Silben → RAP ≈ 6:17, HYBRID ≈ 8:22, GESUNGEN ≈ 12:33. Die neue Zeilenentlastung kann die reale Dauer verändern; keine feste Geschwindigkeits- oder Dauerreduktion versprechen. Über zehn Minuten eine knappe Warnzeile mit Rechnung außerhalb der Lyrics; nicht still kürzen.
+
+### Aufteilen und Extend
+
+- Jeden endgültigen kopierten Block einschließlich aller Tags und Zeilenumbrüche tatsächlich zählen; maximal 5.000 Zeichen. Auch weitere Hook-Blöcke unterliegen dieser Grenze.
+- Bevorzugter natürlicher Schnittpunkt bleibt nach der Produkt-Übergabe, alternativ nach dem Arzt-Beat, sofern der Block bis dahin ins Limit passt. Sonst die letzte passende vollständige Section-Grenze davor wählen.
+- Keinen Verse oder Chorus mitten im Abschnitt abschneiden. Falls eine Section selbst zu groß wäre, sie vorher an sinnvollen Sub-Beat-Grenzen nach Phase 3b in vollständige Sections strukturieren; keine abgeschnittene Section als fertigen Block ausgeben.
+- Referenz nicht vorschnell nur als Hook plus vier Bars ausgeben. Platz nach diesen Aufteilungsregeln nutzen, auch wenn vor 5.000 Zeichen an einer guten Grenze Schluss ist.
+- Restlichen Body lückenlos und ohne ungewollte Wiederholung als weitere vollständige Blöcke ausgeben. Teil 2 und folgende als **Extend**, gleicher Style + Exclude, ab dem passenden Ende der vorherigen Generierung; anschließend Get Whole Song, soweit im verwendeten Modell verfügbar.
+- Fallback bei Extend-Drift: Persona aus Run 1 erstellen und die Fortsetzung damit generieren. Nicht standardmäßig unabhängige Neu-Runs für die Body-Hälften planen.
+- Cover-Hook-Varianten sind davon getrennt: Sie dürfen ihre absichtlichen vier Übergangs-Bars enthalten; Body-Fortsetzungen werden dadurch nicht zu Cover-Hooks.
+- Würde eine weitere Hook samt vier festen Body-Bars trotz sinnvoller vollständiger Section-Aufteilung nicht in einen Block passen, nichts kürzen und die Passage nicht verändern. Die Hook vollständig über Fortsetzungsblöcke planen und den vierbarigen Übergang zusammen am Hook-Ende halten; notwendige Extend-Schritte knapp beschriften.
+
+## Phase 5 — Style-Prompt und Exclude
+
+Vorhandenen Prompt übernehmen. Einen neuen Style-Prompt/Exclude über suno-style-prompt erstellen lassen, nicht hier parallel bauen. Wenn dieser Skill nicht verfügbar ist, den vorhandenen Prompt anfordern, soweit für den Auftrag nötig. Die Lyrics-Vorbereitung nicht mit einem erfundenen Style-Prompt erweitern. Nach eventueller abgestimmter Anpassung für klare Artikulation gilt innerhalb der Cover-Serie ein unveränderter Style-Prompt.
+
+## Phase 6 — Run-Workflow auf Nachfrage
+
+Die bisherigen Modell-/Feature-Bezeichnungen sind Bestandsnotizen, keine Verfügbarkeitsgarantie; die im Konto tatsächlich angebotenen Funktionen nutzen.
+
+1. Optionaler Pre-Test wie bisher: v6-mini, Hook plus erster Verse, ungefähr 30 Sekunden. Aussprache und Tempo prüfen. Dieser Test ersetzt oder verkürzt nicht die vollständigen ausgegebenen Referenzblöcke.
+2. Full Run auf v6/Precision, soweit verfügbar; v6-wild nur zur Sound-Exploration. Hook 1 plus ersten Body-Block als eigentliche Referenz generieren, Rest per Extend.
+3. Weitere Hook-Varianten per Cover mit 85 % Audio Influence und demselben Style-Prompt; Lyrics gemäß Fall A/B.
+4. Kleinster Eingriff zuerst: Aussprachefehler per Einzelwort-/Zeilen-Lyric-Edit, schlechte Section per Section-Edit, falsches Genre/Stimme/Mix per Style-Anpassung über suno-style-prompt, abgehacktes Ende über [Outro] oder Extend ab gutem Punkt. Keine globale Neugenerierung für einen einzelnen Wortfehler empfehlen.
+5. Pro Test/Rerun genau eine Variable ändern: Lyrics-Format oder Style oder Exclude; Baseline aufheben. Notwendiger Texttausch in einer Cover-Serie ist Teil des vorgesehenen Varianten-Workflows.
+6. Learning mit Modell, Modus, Effekt und gemessener Länge protokollieren, Pace-Schätzungen kalibrieren.
+
+## Ausgabeformat
+
+Bei mehreren Hooks genau eine knappe Anfangszeile entsprechend dem Ergebnis:
+
+- „Gemeinsames Hook-Ende – Hooks separat“
+- oder „Unterschiedliche Hook-Enden – jeweils vier Body-Bars anhängen“
+
+Danach alle benötigten Generierungsblöcke **einzeln beschriftet und jeweils in einem eigenen kopierfertigen Code-Block** ausgeben:
+
+1. „Referenz — Hook 1 + Body Teil 1“.
+2. Bei Bedarf „Body Teil 2 — Extend“, weitere Fortsetzungen entsprechend.
+3. „Hook 2 — Cover“, „Hook 3 — Cover“ usw.; bei Fall B jeweils „+ vier Body-Bars“ in der äußeren Beschriftung.
+
+Innerhalb der Code-Blöcke ausschließlich Lyrics und erlaubte Tags. Keine Header, Bar-Zahlen, Zeichenzähler, Erklärungen oder Schnittmarkierungen. Produktionshinweise außerhalb halten und knapp bündeln:
+
+- Cover: Referenzversion, Audio Influence 85 %, gleicher Style-Prompt.
+- Fall B: „Schnitt nach vier Body-Bars der Hook-Variante; gemeinsamen Body ab Bar 5 anschließen.“ Falls nötig die geplante Bar-Zuordnung anhand vorhandener Textstellen kurz außerhalb erläutern.
+- Bei Body-Split: Fortsetzungs-/Extend-Punkt knapp nennen.
+- Bei Schätzung über zehn Minuten: Rechnung und Hinweis, dass Kürzen einen expliziten Copy-/Flow-Auftrag erfordert.
+- Die eingeschränkte musikalische Reproduzierbarkeit höchstens in einem kurzen Hinweis nennen, keine langen Erläuterungen.
+- Nur bei ausdrücklich aktiviertem Flow-Modus zusätzlich kurz die Copy-Änderungen nennen.
+
+Bei einer Hook kein Varianten-Status nötig; Referenz und benötigte Fortsetzungen ausgeben. Kein unnötiges Vorwort, keine Erklärung jeder Tag-Wahl. Die alte Beschränkung auf einen einzigen Code-Block entfällt, soweit mehrere Generierungen nötig sind.
+
+## Non-Negotiables und Abschlussprüfung
+
+Vor jeder Ausgabe prüfen und Fehler korrigieren:
+
+1. **Modus geklärt?** Nie RAP stillschweigend annehmen. RAP bleibt RAP, HYBRID bleibt Hybrid, GESUNGEN bleibt gesungen.
+2. **Vollständige Texttreue?** Jeden Hook und den Body vollständig gegen das Original prüfen, nicht nur Stichproben. Wortreihenfolge, Aussagen und Inhalte erhalten. Ausschließlich Satzzeichen/Umbrüche, ausgeschriebene Zahlen, minimale Homographen-Einbettung und bestätigte Aussprachevarianten sind technische Ausnahmen. Jede weitere Änderung benötigt den ausdrücklich aktivierten Flow-Modus und dessen QC.
+3. **Hook-Enden korrekt verglichen?** Gemeinsame abschließende Passage, nicht bloß letztes Wort. Richtigen Fall A/B wählen.
+4. **Vier Bars korrekt?** In Fall B musikalisch geplante vier Takte, einmal finalisiert, in allen weiteren Hook-Varianten exakt identisch einschließlich Tags und Umbrüchen. Referenz enthält sie ebenfalls. Schnitt führt zum gemeinsamen Body ab Bar 5; keine Doppelung.
+5. **Referenz vollständig genug?** Hook 1 plus erster Body-Abschnitt nach normalen Aufteilungsregeln, nicht auf vier Bars reduziert. Jeder Generierungsblock tatsächlich höchstens 5.000 Zeichen einschließlich Tags/Formatierung.
+6. **Sections vollständig?** Kein Verse/Chorus an Generierungsgrenzen abgeschnitten; Section-Deckel geprüft. Body-Fortsetzungen lückenlos, als Extend beschriftet.
+7. **Musikalische Rap-Phrasierung?** Gegenüber den alten Regeln ungefähr 20 % weniger Silben-/Rhythmuslast pro Rap-Zeile; natürliche Wortgruppen und Betonung, keine mechanische Wortzählerei, keine unnötigen Kurzfragmente oder überladenen Hook-Sprints. Vorhandene Reime sinnvoll hörbar, ohne Copy-Änderung.
+8. **Zahlen/Aussprache?** Ziffernsuche im Lyrics-Text: keine Ziffern verbleiben. Zahlenwerte erhalten; alle bestätigten Varianten bei jeder Wiederholung umgesetzt. Homographen geprüft, keine unnötigen Zusätze.
+9. **Dialoge/Satzzeichen?** Zitate mit Anführungszeichen, zugehörigem Doppelpunkt und Fragezeichen geschützt; Aufzählungs-Kommas erhalten. Andere Kommas/Punkte nach Phase 2b.
+10. **Tags/Breakdowns?** Nur erlaubte Tags, jeweils eigene Zeile, kein [Intro], keine Deskriptor-Tags. Chorus nur auf emotionalen Ankern. Breakdowns aus Markierungen oder freigegebenem Default plus letzter CTA-Zeile; Rückkehr-Tag außer am Schluss.
+11. **Bereinigter Output?** Produktionsheader und Notizen entfernt, alle Blöcke einzeln kopierfertig beschriftet, Schnittanweisungen nur außerhalb. Passender kurzer Varianten-Status zu Beginn; zusätzliche Hinweise nur soweit erforderlich.
+12. **Dauer und Workflow?** Länge als Schätzung berechnet, über zehn Minuten knapp gewarnt; keine feste Geschwindigkeitsgarantie. Cover mit 85 % und identischem Style vorgesehen; Body-Fortsetzungen per Extend, Einzelwortfehler per kleinstem Edit.
+
+## Kurze Formatierungsbeispiele
+
+### Natürliche Phrase statt Wortverbot
+
+„Ich nehme sie mit“ kann geschlossen stehen bleiben. Dagegen „wie er mit / meiner besten Freundin …“ möglichst nicht auseinanderreißen. Reim und Silben prüfen, ohne Wörter umzustellen.
+
+### RAP — technisch aufbereitet, mit mehr Luft
+
+Original:
+
+> Auf das Finale hab ich ein Jahr gespart. Markus und ich, seit 20 Jahren jedes Spiel. Jeder Bus, jede Kurve, jede Niederlage.
+
+Mögliche Phrasierung, keine starre Taktvorlage:
+
+```text
+[Verse]
+Auf das Finale hab ich ein Jahr gespart
+Markus und ich seit zwanzig Jahren jedes Spiel
+Jeder Bus, jede Kurve, jede Niederlage
+```
+
+Der vorhandene Stakkato-Listenabschluss darf kürzer bleiben. Keine zusätzlichen Wörter, nur Zahl/Satzzeichen technisch aufbereitet. Die frühere 25+-Wort-Zusammenziehung ist kein neuer Goldstandard.
+
+### Homographen und Aussprache
+
+„Drei Uhr nachts. Bad. Schal noch um den Hals.“ kann wie bisher minimal zu „Drei Uhr nachts, stand im Bad, Schal noch um den Hals“ eingebettet werden. Diese enge technische Ausnahme ist kein Flow-Modus. „Lieferessen“ wird immer „Liefa-Essen“, „S-Allyl-Cystein“ immer „S-Allyl-Cystee-ihn“.
+
+### Chorus in allen Modi
+
+Inventar wie „Die Brust: weich, die Kieferlinie: weg, der Bart: grau“ bleibt Verse und wird je nach Dichte sinnvoll phrasiert. Erst das emotionale Fazit wird Chorus, zum Beispiel:
+
+```text
+[Chorus]
+Ich war so lange damit beschäftigt alle über Wasser zu halten
+dass ich zum Mitbewohner geworden bin der die Rechnungen zahlt
+Ich hab alles gemacht was ein guter Mann machen soll
+und am Ende hat trotzdem keiner mehr hingeguckt
+```
+
+Chorus-Phrasen dürfen länger oder kürzer als Verse-Richtwerte sein, wenn sie natürlich singbar sind. Kein Text für ein Reimschema umschreiben.
+
+## Learnings-Rückfluss
+
+Wenn ein Output schleppt, rusht oder Tags anders reagieren: Datum · Modell · Modus · beobachteter Effekt · hilfreiche Änderung · gemessene Länge versus Schätzung ergänzen. Ohne Modellangabe ist die Übertragbarkeit begrenzt. Der lokale Skill ist die maßgebliche Anleitung; historische Befunde sind Kontext und überschreiben keine aktuellen Regeln.
+
+Die bisherigen Learnings bleiben unten als Historie erhalten. Insbesondere die frühere maximale Zeilendichte und pauschale Kurzzeilen-Zusammenziehung sind durch die neue Phrasierung relativiert. Flow-Modus bleibt ausdrücklich optional; Zahlen- und Ausspracheaufbereitung bleiben aktiv.
+
+
+### Historische Learnings aus dem bisherigen Skill
+
+* 2026-10-10 · Modell nicht protokolliert · RAP · Kurzzeilen (2–4 Wörter) sind der Hauptgrund für langsamen Rap; Tempo-Angaben im Style-Prompt allein ändern nichts. Zusammenziehen auf 12–18+ Wörter pro Zeile hat es gelöst.
+* 2026-10-10 · Modell nicht protokolliert · RAP · Deskriptor-Tags ([Spoken Word], [Whispered], [Minimal beat]) haben Suno aktiv gebremst; reduziert auf Struktur-Tags + Breakdown-Tags.
+* 2026-10-10 · Modell nicht protokolliert · RAP · Grammatik-Komma im Hook hat eine hörbare Pause erzeugt. Lösung: Hook-Satz ohne Satzzeichen, Relativsatz-Kommas generell raus.
+* 2026-10-10 · Modell nicht protokolliert · Ziffern falsch/englisch ausgesprochen ("3:1", "6 Stunden"). Lösung: alle Zahlen ausschreiben.
+* 2026-10-10 · Modell nicht protokolliert · "Bad." allein wurde "bed". Lösung: Homographen minimal einbetten.
+* 2026-10-10 · Modell nicht protokolliert · Anführungszeichen im Hook entfernt → Nachricht wurde Erzähler-Zeile. Zitate bleiben überall.
+* 2026-10-10 · Modell nicht protokolliert · RAP · Zeilen mit 30–35 Wörtern → zu schnell, Wörter verschluckt. Obergrenze 25.
+* 2026-10-10 · Modell nicht protokolliert · Hook und Entdeckung ohne Section-Wechsel ohne Pause durchgerappt. Lösung: Leerzeile + [Verse], Eskalation [Instrumental Break].
+* 2026-10-10 · Flow-Modus eingeführt (Phase 2e).
+* 2026-10-15 · Quelle usesuno.com (Tests auf v5.5) · Delivery-Modi RAP/HYBRID/GESUNGEN eingeführt — Skill war hart auf Rap verdrahtet.
+* 2026-10-15 · Quelle usesuno.com (v5.5, 8 Generationen) · Lange Zeilen → schnelles Word-Packing ohne verschluckte Wörter (bestätigt RAP-Regel); dichte Lyrics machten den Song teils LÄNGER (Ø 4:57 vs. 3:21) statt nur schneller → Zeilendichte ersetzt die Tempo-Lock im Style nicht.
+* 2026-10-15 · Quelle usesuno.com (v5.5) · Kürzere, wiederholte Chorus-Zeilen → klarere Phrasenenden und erkennbarerer Hook (4/4) → Chorus-Ausnahme eingeführt. Auf v6 noch unbestätigt.
+* 2026-10-15 · Quelle usesuno Duration Estimator · Sections über ~45 Sek werden gerusht/abgeschnitten → Section-Deckel (Phase 3b). Pace-Werte sind eigene Schätzungen, nach Runs kalibrieren.
+* 2026-10-15 · Suno v6 live seit 09.09.2026 (Section-Edit, Lyric-Edit, Extend) → Split als Extend, Einzelwort-Fixes statt Reroll, Pre-Test auf v6-mini.
+* 2026-10-15 · OFFENER TEST · [Breakdown] (dokumentiert) vs. [Beat drops out]/[Beat drops in] (custom) an derselben Stelle.
+
+### Aktuelle Regeländerung
+
+* 2026-10-24 · Nutzer-Workflow · Gemeinsames Hook-Ende: weitere Hooks separat. Unterschiedliche Enden: vier identische musikalische Body-Bars an weitere Hooks; Schnitt zum gemeinsamen Body ab Bar 5. Referenz bleibt Hook 1 plus regulärer erster Body-Abschnitt bis maximal 5.000 Zeichen.
+* 2026-10-24 · Nutzer-Vorgabe · Rap-Phrasierung in RAP/HYBRID etwa 20 % weniger dicht als bisher; Silben, natürliche Phrasen und vorhandene Reime priorisieren. Keine garantierte Geschwindigkeitsreduktion. Zahlen, bestätigte Aussprachevarianten und ausdrücklich optionaler Flow-Modus bleiben erhalten.
